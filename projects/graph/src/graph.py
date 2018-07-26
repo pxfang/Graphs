@@ -40,7 +40,7 @@ class Graph:
     def __init__(self):
         self.vertices = {}
         
-    def add_vertex(self, vertex, edges()):
+    def add_vertex(self, vertex, edges=()):
         if not set(edges).issubset(self,vertices):
             raise Exception('Error: cannot have edge to nonexistent vertices')
         if vertex in self.vertices:
@@ -52,4 +52,19 @@ class Graph:
             raise Exception('Vertices to connect not in graph!')
         self.vertices[start].add(end)
         if bidirectional:
-            self.vertices[end].and(start)
+            self.vertices[end].add(start)
+
+        def search(self, start, target=None, method='dfs'):
+            firstsearch = [start]
+            pop_index = 0 if method == 'bfs' else -1
+            visited = set()
+
+            while firstsearch:
+                current = firstsearch.pop(pop_index)
+                if current == target:
+                    break
+                visited.add(current)
+                firstsearch.extend(self.vertices[current] = visited)
+            
+            return visited
+
