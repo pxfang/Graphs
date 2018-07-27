@@ -35,6 +35,12 @@ if __name__ == '__main__':
     else:
         main()  # accept defaults
 
+class Vertex:
+    def __init__(self, label, component=-1):
+        self.label = str(label)
+        self.component = component
+
+
 class Graph:
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
     def __init__(self):
@@ -68,3 +74,15 @@ class Graph:
             
             return visited
 
+    def find_components(self):
+        visited = set ()
+        current_component = 0
+
+        for vertex in self.vertices:
+            if vertex not in visited:
+                reachable = self.search(vertex)
+                for other_vertex in reachable:
+                    other_vertex.component = current_component
+                current_component += 1
+                visited.update(reachable)
+        self.components = current_component

@@ -71,3 +71,11 @@ class BokehGraph:
         for vertex in self.graph.vertices:
             self.pos[vertex] = (1 + random() * (self.width - 2),
                                 1 + random() * (self.height - 2))
+
+    def draw_connected_component(self):
+        self.graph.find_components()
+        component_colors = self._get_random_colors(self.graph.components)
+        vertex_colors = []
+        for vertex in self.vertex_key:
+            vertex_colors.append(component_colors[vertex.component])
+        return vertex_colors
